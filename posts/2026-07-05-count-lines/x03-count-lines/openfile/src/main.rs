@@ -24,13 +24,7 @@ fn run() -> Result<(), Box<dyn Error>> {
     let file = File::open(file_name)?;
     println!("Opened file {}", file_name);
     let reader = io::BufReader::new(file);
-    let mut count = reader.lines().count();
-
-/*    
-    for _line in reader.lines() {
-        count += 1;
-    }
-*/
+    let count = reader.lines().count();
     println!("Count: {}", count);
     Ok(())
 }
