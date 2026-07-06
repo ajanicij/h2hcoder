@@ -1,0 +1,26 @@
+use std::env;
+use std::process;
+use std::fs::File;
+use std::error::Error;
+
+fn main() {
+    match run() {
+        Ok(()) => (),
+        Err(msg) => {
+            eprintln!("Error: {}", msg);
+            process::exit(1);
+        }
+    }
+}
+
+fn run() -> Result<(), Box<dyn Error>> {
+    let args: Vec<String> = env::args().collect();
+    if args.len() < 2 {
+        return Err(String::from("no file name").into());
+    }
+    let file_name = &args[1];
+    println!("File name: {}", file_name);
+    let file = File::open(file_name)?;
+    println!("Opened file {}", file_name);
+    Ok(())
+}
